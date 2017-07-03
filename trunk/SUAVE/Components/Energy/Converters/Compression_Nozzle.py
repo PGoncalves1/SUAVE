@@ -59,7 +59,7 @@ class Compression_Nozzle(Energy_Component):
         
         #unpack from self
         pid     =  self.pressure_ratio
-        #etapold =  self.polytropic_efficiency
+        etapold =  self.polytropic_efficiency
 	eff     =  self.efficiency
         
         #Method to compute the output variables
