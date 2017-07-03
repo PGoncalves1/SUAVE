@@ -51,17 +51,26 @@ class Compression_Nozzle(Energy_Component):
         Cp      = conditions.freestream.specific_heat_at_constant_pressure
         Po      = conditions.freestream.pressure
         R       = conditions.freestream.universal_gas_constant
-        
+        M0      = conditions.freestream.mach_number
+
         #unpack from inpust
         Tt_in   = self.inputs.stagnation_temperature
         Pt_in   = self.inputs.stagnation_pressure
         
         #unpack from self
         pid     =  self.pressure_ratio
-        etapold =  self.polytropic_efficiency
+        #etapold =  self.polytropic_efficiency
+	eff     =  self.efficiency
         
         #Method to compute the output variables
         
+	#--Getting pressure recovery factor
+	pid = 1.0 * M0 / M0
+        if np.any(M0 <= 1):
+            pid = eff     
+        else:
+            pid = eff*(1-0.075*(M0-1)**1.35)
+
         #--Getting the output stagnation quantities
         Pt_out  = Pt_in*pid
         Tt_out  = Tt_in*pid**((gamma-1)/(gamma*etapold))
