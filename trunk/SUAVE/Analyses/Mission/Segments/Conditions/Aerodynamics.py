@@ -80,6 +80,9 @@ class Aerodynamics(Basic):
         # propulsion conditions
         self.propulsion = Conditions()
         self.propulsion.throttle           = ones_1col * 0
+	self.propulsion.exit_velocity      = ones_1col * 0
+        self.propulsion.exit_pressure      = ones_1col * 0
+        self.propulsion.area_ratio         = ones_1col * 0
         self.propulsion.battery_energy     = ones_1col * 0
         self.propulsion.battery_voltage    = ones_1col * 0
         self.propulsion.thrust_breakdown       = Conditions()
@@ -90,6 +93,7 @@ class Aerodynamics(Basic):
         # energy conditions
         self.energies.gravity_energy       = ones_1col * 0
         self.energies.propulsion_power     = ones_1col * 0
+	self.energies.power2               = ones_1col * 0
         
         # weights conditions
         self.weights.vehicle_mass_rate     = ones_1col * 0
