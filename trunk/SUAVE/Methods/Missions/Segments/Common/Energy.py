@@ -2,6 +2,7 @@
 # 
 # Created:  Jul 2014, SUAVE Team
 # Modified: Jan 2016, E. Botero
+#           May 2017, P. Goncalves	    
 
 # ----------------------------------------------------------------------
 #  Imports
@@ -59,6 +60,10 @@ def update_thrust(segment,state):
     conditions = state.conditions
     conditions.frames.body.thrust_force_vector = results.thrust_force_vector
     conditions.weights.vehicle_mass_rate       = results.vehicle_mass_rate
+    conditions.energies.propulsion_power       = results.power
+    conditions.propulsion.exit_velocity        = results.exit_velocity
+    conditions.propulsion.exit_pressure        = results.exit_pressure
+    conditions.propulsion.area_ratio           = results.area_ratio
     
 
     
