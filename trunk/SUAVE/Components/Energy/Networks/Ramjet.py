@@ -81,6 +81,8 @@ class Ramjet(Propulsor):
         #link the combustor to the high pressure compressor
         combustor.inputs.stagnation_temperature                = inlet_nozzle.outputs.stagnation_temperature
         combustor.inputs.stagnation_pressure                   = inlet_nozzle.outputs.stagnation_pressure
+        combustor.inputs.mach_number                           = inlet_nozzle.outputs.mach_number
+
         #combustor.inputs.nozzle_exit_stagnation_temperature = inlet_nozzle.outputs.stagnation_temperature
         
         #flow through the high pressor comprresor
