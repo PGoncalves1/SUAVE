@@ -78,6 +78,7 @@ class Supersonic_Intake(Energy_Component):
         self.outputs.stagnation_temperature  = 0.
         self.outputs.stagnation_pressure     = 0.
         self.outputs.stagnation_enthalpy     = 0.
+        self.outputs.mach_number             = -1.
     
     def size(self, conditions):
         
@@ -85,7 +86,6 @@ class Supersonic_Intake(Energy_Component):
         gamma   = conditions.freestream.isentropic_expansion_factor
         M0      = conditions.freestream.mach_number
         
-        print 'M0', M0
         
         #unpack from self
         eff =  self.polytropic_efficiency
@@ -197,6 +197,7 @@ class Supersonic_Intake(Energy_Component):
         Po      = conditions.freestream.pressure
         R       = conditions.freestream.universal_gas_constant
         M0      = conditions.freestream.mach_number
+    
         
         #unpack from inpust
         Tt_in   = self.inputs.stagnation_temperature
@@ -256,7 +257,6 @@ class Supersonic_Intake(Energy_Component):
         ht_out  = Cp*Tt_out
         u_out   = np.sqrt(2*(ht_out-h_out))
           
-        print 'M3', M3[0], 'Pt_out', PtrT[0]
         #pack computed quantities into outputs
         self.outputs.stagnation_temperature  = Tt_out
         self.outputs.stagnation_pressure     = Pt_out
