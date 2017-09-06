@@ -351,7 +351,7 @@ def vehicle_setup(source_ratio=1.):
     combustor.tag = 'combustor'
     
     # setup
-    combustor.efficiency                = 0.99
+    combustor.efficiency                = 0.96
     combustor.alphac                    = 1.0     
     combustor.turbine_inlet_temperature = 2400.
     combustor.pressure_ratio            = 0.97
@@ -383,12 +383,12 @@ def vehicle_setup(source_ratio=1.):
     thrust.tag ='compute_thrust'
  
     # total design thrust (includes all the engines)
-    thrust.total_design             =  ramjet.number_of_engines*72000. * Units.N #Newtons
+    thrust.total_design             =  ramjet.number_of_engines*90000. * Units.N #Newtons
  
     # Note: Sizing builds the propulsor. It does not actually set the size of the ramjet
     # Design sizing conditions
     altitude      = 12.0*Units.km
-    mach_number   = 2.5
+    mach_number   = 2.3
     isa_deviation = 0.
     
     # add to network
@@ -445,7 +445,7 @@ def plot_mission(results,line_style='ro-'):
     # ------------------------------------------------------------------
 
 
-    fig = plt.figure("Propulsion",figsize=(8,9))
+    fig = plt.figure("Propulsion",figsize=(8,12))
     i=0
     for segment in results.segments.values():
         
@@ -459,22 +459,28 @@ def plot_mission(results,line_style='ro-'):
         #sfc = segment.conditions.propulsion.thrust_specific_fuel_consumption
 
 
-        axes = fig.add_subplot(3,1,1)
+        axes = fig.add_subplot(4,1,1)
         axes.plot( time , Thrust , line_style )
         #axes.set_xlabel('Time (min)',axis_font)
         axes.set_ylabel('Thrust (lbf)',axis_font)
         axes.grid(True)
         
-        axes = fig.add_subplot(3,1,2)
+        axes = fig.add_subplot(4,1,2)
         axes.plot( time , sfc , line_style)
         axes.set_ylabel('sfc (lb/lbf-hr)',axis_font)
         axes.grid(True)	
 
         
-        axes = fig.add_subplot(3,1,3)
+        axes = fig.add_subplot(4,1,3)
         axes.plot( time , eta*100 , line_style )
         axes.set_xlabel('Time (min)',axis_font)
         axes.set_ylabel('Throttle (%)',axis_font)
+        axes.grid(True)
+        
+        axes = fig.add_subplot(4,1,4)
+        axes.plot( time , mdot , line_style )
+        axes.set_xlabel('Time (min)',axis_font)
+        axes.set_ylabel('Fuel Burn rate (kg/s)',axis_font)
         axes.grid(True)
         
         plt.savefig("engine_1.png")
@@ -618,9 +624,9 @@ def mission_setup(analyses):
     
     segment.analyses.extend( analyses.base )
     
-    segment.air_speed = 360
+    segment.air_speed = 540
     segment.distance = 100*Units.km
-    segment.altitude = 13 * Units.km
+    segment.altitude = 12 * Units.km
 
         
     mission.append_segment(segment)
@@ -639,9 +645,9 @@ def mission_setup(analyses):
     
     segment.analyses.extend( analyses.base )
     
-    segment.altitude = 13 * Units.km
-    segment.air_speed_initial = 360*Units['m/s']
-    segment.air_speed_final   = 770*Units['m/s']
+    segment.altitude = 12 * Units.km
+    segment.air_speed_initial = 540*Units['m/s']
+    segment.air_speed_final   = 690*Units['m/s']
     segment.acceleration = 0.7*Units['m/s^2']
 
         
@@ -657,9 +663,9 @@ def mission_setup(analyses):
     
     segment.analyses.extend( analyses.base )
     
-    segment.air_speed = 770 * Units['m/s']
+    segment.air_speed = 690 * Units['m/s']
     segment.distance = 300*Units.km
-    segment.altitude = 13* Units.km
+    segment.altitude = 12* Units.km
 
         
     mission.append_segment(segment)
